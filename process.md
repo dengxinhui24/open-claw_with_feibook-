@@ -51,4 +51,25 @@
 第四步：浏览器打开面板访问：http://localhost:18789/#token=你复制的token  
 
 # 三、让OpenClaw连接飞书
+1.在刚刚的MobaXterm里面下载飞书插件    
+指令openclaw channels login --channel feishu  
+<img width="708" height="183" alt="image" src="https://github.com/user-attachments/assets/ccf7f540-dc87-4dde-9fee-8213d884355b" />    
+此时回到OpenClaw网页版的设置中频道就可以看到有飞书的状态和设置了   
+<img width="1342" height="985" alt="image" src="https://github.com/user-attachments/assets/bb0e5be1-d587-4d45-80ca-3d454e27ca22" />  
+2.现在去飞书开放平台，点开开发者后台，选择使用智能体模板创建，然后就获得了APP ID和APP Secret    
+<img width="1348" height="578" alt="image" src="https://github.com/user-attachments/assets/6cf01e81-19bb-46fc-b8ae-5f97b1d492d8" />
+3.现在回到MobaXterm里面，输入指令：openclaw channels login --channel feishu，并且把刚刚得到的APP ID和APP Secret配置好
+<img width="744" height="572" alt="屏幕截图 2026-06-25 142518" src="https://github.com/user-attachments/assets/cbc30471-5064-44d1-ade0-4a132fccbd1b" />    
+再次重启网关加载配置即可 （指令：openclaw gateway restart）如下所示   
+<img width="1355" height="652" alt="image" src="https://github.com/user-attachments/assets/fcc7fd34-6b72-4255-bb3f-18572c728f2d" />    
+4.现在去飞书创建一个群聊，并且把群聊id给到OpenClaw，也即是Actions中下面有ADD即可（这种是因为我在选择配置的是指定了机器人仅在我手动添加的指定群聊里回复）  
+5.然后去飞书添加群机器人，选择刚刚我们所创建的智能助手  
+<img width="1291" height="735" alt="image" src="https://github.com/user-attachments/assets/e31add88-5556-4de7-b0a4-a3402a51d868" />  
+
+# 四、让Agent（机器人活起来） 
+1.安装ollama本地部署，这样可以让OpenClaw用到本地大模型，从而让机器人回复，在命令行输入：curl -fsSL https://ollama.com/install.sh | sh
+<img width="675" height="63" alt="image" src="https://github.com/user-attachments/assets/6911054e-71a3-4be1-982e-d57adf8096b8" />  
+
+
+
 
