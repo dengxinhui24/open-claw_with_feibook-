@@ -1,1 +1,54 @@
+# 一、准备工作
+1.在电脑上下载好飞书，并且注册好飞书的账号   [飞书：用于创建企业自建应用，接收机器人消息，调试API权限]  
+<img width="1309" height="748" alt="image" src="https://github.com/user-attachments/assets/345ea1b9-b349-4cb7-ab70-e13c59547473" />
+2.在电脑上下载MobaXterm，用来做SSH登录服务器  [远程SSH管理云服务器、上传项目代码、后台启动OpenClaw服务]  
+<img width="927" height="570" alt="image" src="https://github.com/user-attachments/assets/7812d95b-eeb5-43f0-a09b-7f3954b79beb" />  
+3.去到 阿里云 \ 腾讯云 购买Linux云服务器用于部署OpenClaw ，如下是我所购置的  
+<img width="336" height="115" alt="image" src="https://github.com/user-attachments/assets/100d8019-051d-44e2-bc75-8a524a3cafd7" />    
+（此外，还需要提前在阿里云平台先把服务器密码设置了）  
+4.打开MobaXterm，并且点击新建会话，选择SSH连接，输入 服务器的ip地址 + 用户名，界面如下所示：  
+<img width="894" height="703" alt="image" src="https://github.com/user-attachments/assets/438c077c-4bb7-4212-b0d1-6583c592791f" />  
+5.后面进行输入刚刚设置的密码，然后再跳转到成功连接的状态，如下：
+<img width="517" height="100" alt="image" src="https://github.com/user-attachments/assets/423845d7-2ba4-4619-a219-dbdbe23760cc" />  
+
+# 二、实操
+1.为了让文件更加整洁，先创建专属文件夹   
+<img width="481" height="34" alt="image" src="https://github.com/user-attachments/assets/f23d6432-5ff2-4a02-a4b1-61e40a17834b" />   
+2.安装Node.js24 （因为是Ubuntu官方脚本，它所提供的node js软件包内置捆绑了npm，所以下载node.js就会node.js 和 npm会一起下载）  
+两条命令拉取 &nbsp;&nbsp;&nbsp;&nbsp;  命令一：curl -fsSL https://deb.nodesource.com/setup_24.x | bash -  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 命令二：apt-get install -y nodejs        
+<img width="667" height="357" alt="image" src="https://github.com/user-attachments/assets/c4f247cc-6167-4171-ab02-cb6646441031" />     
+<img width="661" height="305" alt="image" src="https://github.com/user-attachments/assets/a9e745dc-bfc5-4692-97d8-8429a7cef12f" />     
+3.将npm全局缓存、全局安装包指定在专属的文件夹中（为了防止文件乱飘）     
+两条指令 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp ;指令1：npm config set cache /opt/openclaw-env/npm-cache &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;指令2：npm config set prefix /opt/openclaw-env/npm-global  
+<img width="657" height="65" alt="image" src="https://github.com/user-attachments/assets/b1b620ff-04b2-441b-a90d-b5cb9cd2451a" />    
+4.把全局命令加入系统环境变量，否则等会终端会找不到openclaw命令  
+两条指令 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;指令1：echo "export PATH=/opt/openclaw-env/npm-global/bin:$PATH" >> /etc/profile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指令2：source /etc/profile    
+<img width="646" height="47" alt="image" src="https://github.com/user-attachments/assets/d11565d6-17cc-43c9-86cb-421738f92e96" />    
+5.验证Node与npm安装
+两条指令 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;指令1：node -v &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 指令2：npm -v  
+<img width="451" height="61" alt="image" src="https://github.com/user-attachments/assets/d8c8a07c-abb9-4926-b379-51bc6e6ea8eb" />  
+6.在专属目录内全局安装OpenClaw  
+安装命令  npm install -g openclaw@latest  
+<img width="1351" height="207" alt="image" src="https://github.com/user-attachments/assets/336d8df6-cc13-4f66-a1d9-8d38e019d2fc" />  
+安装成功验证  openclaw --version  
+<img width="541" height="30" alt="image" src="https://github.com/user-attachments/assets/f942f068-22f2-4a78-bbcd-9303adea4b67" />  
+7.初始化OpenClaw，配置文件自动归类  
+命令  openclaw onboard --install-daemon
+<img width="816" height="717" alt="image" src="https://github.com/user-attachments/assets/e64d2bbe-7477-41f7-8321-b8499481b6a7" />  
+8.初始化的是尽量都能跳过就跳过，等后面在可视化界面再设置也不迟    
+<img width="665" height="624" alt="image" src="https://github.com/user-attachments/assets/3be99b34-60ac-41fd-9399-de941633b1db" />  
+9.在MobaXterm新建一个本地会话，开SSH隧道转发，让自己可以在自己浏览器上查看到阿里云服务器打开的浏览器 (也可以在本地cmd中输入)
+指令 ssh -N -L 18790:127.0.0.1:18789 root@你的公网IP 
+并且会提示需要输入你的密码
+<img width="743" height="151" alt="屏幕截图 2026-06-25 133920" src="https://github.com/user-attachments/assets/05525ef0-af8f-4b33-867c-d7023930ed84" />
+10.随后在本机电脑的浏览器上搜索 http://localhost:18789/#token=ssh上显示的token（OpenClaw启动成功后会显示的）  
+<img width="1350" height="1330" alt="image" src="https://github.com/user-attachments/assets/acfed2f3-45b0-41fe-9b89-0262f4732d7e" />
+
+11.注意如何在下次重新登入呢？
+第一步：在MobaXterm登录阿里云服务器，进入服务器终端  
+第二步：启动OpenClaw网关 &nbsp;&nbsp;&nbsp;&nbsp;指令:openclaw geteway start  (这一步启动之后，终端会打印带token的面板地址，复制token)  
+第三步：在本地的CMD开SSH隧道输入：ssh -N -L 18789:127.0.0.1:18789 root@阿里云公网IP  
+第四步：浏览器打开面板访问：http://localhost:18789/#token=你复制的token  
+
+# 三、让OpenClaw连接飞书
 
