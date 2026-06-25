@@ -67,7 +67,7 @@
 <img width="1291" height="735" alt="image" src="https://github.com/user-attachments/assets/e31add88-5556-4de7-b0a4-a3402a51d868" />  
 
 # 四、让Agent（机器人活起来） 
-1.安装ollama本地部署，这样可以让OpenClaw用到本地大模型，从而让机器人回复，在命令行输入：curl -fsSL https://ollama.com/install.sh | sh
+1.安装ollama本地部署，这样可以让OpenClaw用到本地大模型，从而让机器人回复，在命令行输入：curl -fsSL https://ollama.com/install.sh | sh  
 <img width="675" height="63" alt="image" src="https://github.com/user-attachments/assets/6911054e-71a3-4be1-982e-d57adf8096b8" />  
 
 
