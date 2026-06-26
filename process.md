@@ -68,7 +68,20 @@
 
 # 四、让Agent（机器人活起来） 
 1.安装ollama本地部署，这样可以让OpenClaw用到本地大模型，从而让机器人回复，在命令行输入：curl -fsSL https://ollama.com/install.sh | sh  
-<img width="675" height="63" alt="image" src="https://github.com/user-attachments/assets/6911054e-71a3-4be1-982e-d57adf8096b8" />  
+<img width="675" height="63" alt="image" src="https://github.com/user-attachments/assets/6911054e-71a3-4be1-982e-d57adf8096b8" />    
+
+but这里如果在Linux中下载太慢了，就可以在windows上先下载好，网址是：https://ollama.com/download/linux  
+
+2.下载好Linux的安装包之后就把它放到我们的MobaXterm中去，并且应该要提前建立好文件夹，如下所示：   
+<img width="211" height="176" alt="image" src="https://github.com/user-attachments/assets/8f5ecbd7-220a-469a-ac7a-8e31bdfb45e5" />  
+
+3.传好之后，我们就进入到放置ollama的文件中去，并且进行解压  
+两条指令&nbsp;&nbsp;&nbsp;&nbsp;：cd /opt/openclaw-env/ollama/&nbsp;&nbsp;&nbsp;&nbsp;tar -zxvf ollama-linux-amd64.tar&nbsp;&nbsp;&nbsp;&nbsp;如下所示：  
+
+
+4.创建软链接，让全局都可以用ollama命令：ln -s $(pwd)/ollama /usr/local/bin/ollama，并且输入：ollama -v查看是否安装成功，如下所示：  
+
+
 
 
 
