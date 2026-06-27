@@ -44,11 +44,13 @@
 10.随后在本机电脑的浏览器上搜索 http://localhost:18789/#token=ssh上显示的token（OpenClaw启动成功后会显示的）  
 <img width="1350" height="1330" alt="image" src="https://github.com/user-attachments/assets/acfed2f3-45b0-41fe-9b89-0262f4732d7e" />
 
-11.注意如何在下次重新登入呢？
+11.注意如何在下次重新登入呢？  
 第一步：在MobaXterm登录阿里云服务器，进入服务器终端  
 第二步：启动OpenClaw网关 &nbsp;&nbsp;&nbsp;&nbsp;指令:openclaw gateway start  (这一步启动之后，终端会打印带token的面板地址，复制token)  
 第三步：在本地的CMD开SSH隧道输入：ssh -N -L 18789:127.0.0.1:18789 root@阿里云公网IP  
 第四步：浏览器打开面板访问：http://localhost:18789/#token=你复制的token  
+
+！！如果找不到token了，就输入指令：cat ~/.openclaw/openclaw.json 就会显示出来了。  
 
 # 三、让OpenClaw连接飞书
 1.在刚刚的MobaXterm里面下载飞书插件    
